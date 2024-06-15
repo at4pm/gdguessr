@@ -1,4 +1,4 @@
-const { creators, levels } = require('../config.json');
+const { creators, levels } = require('../../config.json');
 
 function random(type) {
     if (type == "creator") {
