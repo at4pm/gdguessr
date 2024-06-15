@@ -1,11 +1,11 @@
 {
-    "creators": [
-        {"name": "1", "file": "1.jpg", "difficulty": "Hard"}, 
-        {"name": "2", "file": "2.jpg", "difficulty": "Easy"}
-    ],
+	"creators": [
+		{"name": "1", "file": "1.jpg", "difficulty": "Hard"}, 
+		{"name": "2", "file": "2.jpg", "difficulty": "Easy"}
+	],
 
-    "levels": [
-        {"name": "1", "file": "1.jpg", "difficulty": "Hard"}, 
-        {"name": "2", "file": "2.jpg", "difficulty": "Easy"}
-    ]
+	"levels": [
+		{"name": "1", "file": "1.jpg", "difficulty": "Hard"}, 
+		{"name": "2", "file": "2.jpg", "difficulty": "Easy"}
+	]
 }

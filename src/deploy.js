@@ -28,23 +28,23 @@ const rest = new REST().setToken(process.env.TOKEN);
 
 // and deploy your commands!
 async function deploy() {
-    try {
-        console.log(`Started refreshing ${commands.length} application (/) commands.`);
+	try {
+		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
-        // Get the application object to use its ID later
-        const application = await rest.get(Routes.oauth2CurrentApplication());
+		// Get the application object to use its ID later
+		const application = await rest.get(Routes.oauth2CurrentApplication());
 
-        // The put method is used to fully refresh all commands in the guild with the current set
-        const data = await rest.put(
-            Routes.applicationCommands(application.id),
-            { body: commands },
-        );
+		// The put method is used to fully refresh all commands in the guild with the current set
+		const data = await rest.put(
+			Routes.applicationCommands(application.id),
+			{ body: commands },
+		);
 
-        console.log(`Successfully reloaded ${data.length} application (/) commands.`);
-    } catch (error) {
-        // And of course, make sure you catch and log any errors!
-        console.error(error);
-    }
+		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+	} catch (error) {
+		// And of course, make sure you catch and log any errors!
+		console.error(error);
+	}
 }
 
 deploy();
