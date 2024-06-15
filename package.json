@@ -1,0 +1,11 @@
+{
+  "name": "gdguessr",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "node --env-file=.env ."
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3"
+  }
+}
