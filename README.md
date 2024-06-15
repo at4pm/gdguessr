@@ -1,5 +1,4 @@
 # gdguessr
-a guessing bot
-i dont know any markdown
-someone help me im dying
+a guessing bot for Creators in the Geometry Dash Community!
+Release date sometime in 2077 lmao
 
