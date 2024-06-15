@@ -1,5 +1,4 @@
 const { REST, Routes } = require('discord.js');
-const { clientId } = require('../config.json');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -32,9 +31,12 @@ async function deploy() {
     try {
         console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
+        // Get the application object to use its ID later
+        const application = await rest.get(Routes.oauth2CurrentApplication());
+
         // The put method is used to fully refresh all commands in the guild with the current set
         const data = await rest.put(
-            Routes.applicationCommands(clientId),
+            Routes.applicationCommands(application.id),
             { body: commands },
         );
 
@@ -45,4 +47,4 @@ async function deploy() {
     }
 }
 
-module.exports = deploy;
+deploy();

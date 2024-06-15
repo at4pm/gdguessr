@@ -3,7 +3,8 @@
   "main": "src/index.js",
   "private": true,
   "scripts": {
-    "start": "node --env-file=.env ."
+    "start": "node --env-file=.env .",
+    "deploy": "node --env-file=.env ./src/deploy.js"
   },
   "dependencies": {
     "discord.js": "^14.15.3"
