@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, userMention } = require('discord.js');
 const random = require("../../util/random.js");
 
 module.exports = {
@@ -18,27 +18,28 @@ module.exports = {
 		var diff = interaction.options.getString('difficulty');
 		var randomC = random('creator');
 
-		do {
+		while (randomC.difficulty != diff) {
 			randomC = random('creator');
-		} while (randomC['difficulty'] != diff);
+		}
 
 		const embed = new EmbedBuilder()
 			.setColor(0xFFFF00)
-			.setDescription(`**Guess the Creator!**\nDifficulty: ${randomC['difficulty']}`)
-			.setImage(`https://mewo.lol/bot/images/creators/${randomC['file']}`);
+			.setDescription(`**Guess the Creator!**\nDifficulty: ${randomC.difficulty}`)
+			.setImage(`https://mewo.lol/bot/images/creators/${randomC.file}`);
 
-		const response = await interaction.reply({ embeds: [embed] })
-			.then(() => {
-				interaction.channel.awaitMessages({ time: 30_000, errors: ['time']})
-					.then(collected => {
-						if (collected.first().content.toLowerCase() === randomC['name'].toLowerCase()) {
-							interaction.reply(`${collected.first().author} got it right!`);
-							return;
-						}
-					})
-					.catch(collected => {
-						interaction.followUp("Times up!");
-					});
-			});
+		await interaction.reply({ embeds: [embed] });
+
+		const filter = message => message.content.toLowerCase() === randomC.name.toLowerCase();
+		const collector = interaction.channel.createMessageCollector({ filter, time: 30_000 });
+
+		collector.on('collect', async message => {
+			collector.stop('guessed');
+			await message.reply('You got it right!');
+		});
+
+		collector.on('end', async (_collected, reason) => {
+			if (reason === 'guessed') return;
+			await interaction.followUp('Times up!');
+		});
 	}
 }
