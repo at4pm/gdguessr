@@ -11,6 +11,7 @@ module.exports = {
 				.setRequired(true)
 				.addChoices(
 					{ name: 'Easy', value: 'Easy' },
+					{ name: 'Medium', value: 'Medium' },
 					{ name: 'Hard', value: 'Hard' },
 				)),
 	

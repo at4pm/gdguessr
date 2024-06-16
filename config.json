@@ -1,7 +1,8 @@
 {
 	"creators": [
-		{"name": "1", "file": "1.jpg", "difficulty": "Hard"}, 
-		{"name": "2", "file": "2.jpg", "difficulty": "Easy"}
+		{"name": "Nexus", "file": "nexus.png", "difficulty": "Easy"},
+		{"name": "Partition", "file": "partition.png", "difficulty": "Medium"},
+		{"name": "Dorami", "file": "dorami.png", "difficulty": "Hard"}
 	],
 
 	"levels": [
