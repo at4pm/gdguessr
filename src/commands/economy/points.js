@@ -1,13 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { getClient, connectDB } = require('../../util/db.js');
 
-const dbClient = new MongoClient(process.env.DBURI, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true
-    }
-});
+const dbClient = getClient();
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -17,7 +11,7 @@ module.exports = {
     async execute(interaction) {
         let points = 0;
         try {
-            await dbClient.connect();
+            await connectDB();
             const collection = dbClient.db("points").collection('users');
             let user = await collection.findOne({ id: interaction.user.id });
             if (!user) {

@@ -1,14 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder, userMention } = require('discord.js');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { getClient, connectDB } = require('../../util/db.js');
 const random = require("../../util/random.js");
 
-const dbClient = new MongoClient(process.env.DBURI, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true
-    }
-});
+const dbClient = getClient();
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -44,20 +38,19 @@ module.exports = {
 
 		collector.on('collect', async message => {
 			collector.stop('guessed');
-			let points = 0;
-			if (randomC.difficulty == 'Easy') {
-				points = 5;
-			} else if (randomC.difficulty == 'Medium') {
-				points = 10;
-            } else if (randomC.difficulty == 'Hard') {
-				points = 15;
-			}
+			const pointTable = {
+				'Easy': 5,
+				'Medium': 10,
+				'Hard': 15
+			};
+			var points = pointTable[randomC.difficulty];
 
 			try {
-				await dbClient.connect();
+				await connectDB();
 				const collection = dbClient.db("points").collection('users');
 				let user = await collection.findOne({ id: interaction.user.id });
 				if (!user) {
+					var newbal = points;
 					await collection.insertOne({
 						id: interaction.user.id,
 						points: points

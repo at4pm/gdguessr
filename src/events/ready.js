@@ -4,6 +4,6 @@ module.exports = {
 	name: Events.ClientReady,
 	once: true,
 	execute() {
-		console.log("on");
+		console.log("GDGUESSR | Bot ready");
 	},
 };
