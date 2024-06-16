@@ -1,5 +1,14 @@
 const { SlashCommandBuilder, EmbedBuilder, userMention } = require('discord.js');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const random = require("../../util/random.js");
+
+const dbClient = new MongoClient(process.env.DBURI, {
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true
+    }
+});
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -35,11 +44,41 @@ module.exports = {
 
 		collector.on('collect', async message => {
 			collector.stop('guessed');
+			let points = 0;
+			if (randomC.difficulty == 'Easy') {
+				points = 5;
+			} else if (randomC.difficulty == 'Medium') {
+				points = 10;
+            } else if (randomC.difficulty == 'Hard') {
+				points = 15;
+			}
+
+			try {
+				await dbClient.connect();
+				const collection = dbClient.db("points").collection('users');
+				let user = await collection.findOne({ id: interaction.user.id });
+				if (!user) {
+					await collection.insertOne({
+						id: interaction.user.id,
+						points: points
+					});
+				} else {
+					var newbal = user.points + points;
+					await collection.updateOne(
+						{ id: interaction.user.id },
+						{ $inc: { points: newbal } }
+					);
+				}
+			} finally {
+				await dbClient.close();
+			}
+
 			const correctEmbed = new EmbedBuilder()
 				.setColor(0x00FF00)
 				.setTitle("**Correct!**")
-				.setDescription(`**${message.author}** correctly guessed **${randomC.name}**\nThey have gained **balls** coins!`);
+				.setDescription(`**${message.author}** correctly guessed **${randomC.name}**\nThey have gained **${points}** points!\nNew balance: **${newbal}**`);
 			await interaction.followUp({ embeds: [correctEmbed] });
+			
 		});
 
 		collector.on('end', async (_collected, reason) => {

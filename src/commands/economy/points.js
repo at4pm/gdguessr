@@ -8,7 +8,6 @@ const dbClient = new MongoClient(process.env.DBURI, {
         deprecationErrors: true
     }
 });
-  
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -19,7 +18,7 @@ module.exports = {
         let points = 0;
         try {
             await dbClient.connect();
-            const collection = dbClient.db().collection('users');
+            const collection = dbClient.db("points").collection('users');
             let user = await collection.findOne({ id: interaction.user.id });
             if (!user) {
                 await collection.insertOne({
