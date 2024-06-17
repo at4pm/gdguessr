@@ -8,5 +8,11 @@
 	"levels": [
 		{"name": "1", "file": "1.jpg", "difficulty": "Hard"}, 
 		{"name": "2", "file": "2.jpg", "difficulty": "Easy"}
-	]
+	],
+
+	"difficulties": {
+		"Easy": {"points": 5, "emoji": "<:Easy:1249495433127137371>"},
+		"Medium": {"points": 10, "emoji": "idk"},
+		"Hard": {"points": 15, "emoji": "<:Impossible:1249495658654597182>"}
+	}
 }

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, userMention } = require('discord.js');
 const { getClient, connectDB } = require('../../util/db.js');
+const { difficulties } = require('../../../config.json');
 const random = require("../../util/random.js");
 
 const dbClient = getClient();
@@ -28,7 +29,7 @@ module.exports = {
 
 		const guessEmbed = new EmbedBuilder()
 			.setColor(0xFFFF00)
-			.setDescription(`**Guess the Creator!**\nDifficulty: ${randomC.difficulty}`)
+			.setDescription(`**Guess the Creator!**\nDifficulty: ${difficulties[randomC.difficulty]["emoji"]} ${randomC.difficulty}`)
 			.setImage(`https://mewo.lol/bot/images/creators/${randomC.file}`);
 
 		await interaction.reply({ embeds: [guessEmbed] });
@@ -38,12 +39,7 @@ module.exports = {
 
 		collector.on('collect', async message => {
 			collector.stop('guessed');
-			const pointTable = {
-				'Easy': 5,
-				'Medium': 10,
-				'Hard': 15
-			};
-			var points = pointTable[randomC.difficulty];
+			var points = difficulties[diff]['points'];
 
 			try {
 				await connectDB();
@@ -59,7 +55,7 @@ module.exports = {
 					var newbal = user.points + points;
 					await collection.updateOne(
 						{ id: interaction.user.id },
-						{ $inc: { points: newbal } }
+						{ $set: { points: newbal } }
 					);
 				}
 			} finally {
