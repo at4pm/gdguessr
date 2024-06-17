@@ -30,12 +30,14 @@ module.exports = {
                 .setTitle(":earth_asia: Global Leaderboard")
                 .setDescription('Points Leaderboard');
 
-            users.forEach(async (user, index) => {
-                const data = await idToName(user.id);
-                const username = await JSON.parse(data).username;
-                console.log(username);
-                embed.addFields({ name: `#${index + 1} ${username}: ${user.points.toString()}`, value: " " });
-            });
+            await Promise.all(
+                users.map(async (user, index) => {
+                    const data = await idToName(user.id);
+                    const username = await JSON.parse(data).username;
+                    console.log(username);
+                    embed.addFields({ name: `#${index + 1} ${username}: ${user.points.toString()}`, value: " " });
+                }),
+            );
 
             await interaction.reply({ embeds: [embed] });
         } finally {
