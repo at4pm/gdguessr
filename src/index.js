@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { connect } = require('mongoose');
 
 const client = new Client({ intents: [
 	GatewayIntentBits.Guilds,
@@ -39,4 +40,7 @@ for (const file of eventFiles) {
 	}
 }
 
-client.login(process.env.TOKEN);
+(async () => {
+	await connect(process.env.DBURI);
+	await client.login(process.env.TOKEN);
+})()
