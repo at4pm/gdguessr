@@ -1,9 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, userMention } = require('discord.js');
-const { getClient, connectDB } = require('../../util/db.js');
 const { difficulties } = require('../../../config.json');
 const random = require("../../util/random.js");
-
-const dbClient = getClient();
+const { UserModel } = require('../../schema/user.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -41,31 +39,15 @@ module.exports = {
 			collector.stop('guessed');
 			var points = difficulties[diff]['points'];
 
-			try {
-				await connectDB();
-				const collection = dbClient.db("points").collection('users');
-				let user = await collection.findOne({ id: interaction.user.id });
-				if (!user) {
-					var newbal = points;
-					await collection.insertOne({
-						id: interaction.user.id,
-						points: points
-					});
-				} else {
-					var newbal = user.points + points;
-					await collection.updateOne(
-						{ id: interaction.user.id },
-						{ $set: { points: newbal } }
-					);
-				}
-			} finally {
-				await dbClient.close();
-			}
+			const user = await UserModel.findByIdAndUpdate(interaction.user.id, {
+				_id: interaction.user.id,
+				$inc: { points },
+			}, { new: true, upsert: true });
 
 			const correctEmbed = new EmbedBuilder()
 				.setColor(0x00FF00)
 				.setTitle("**Correct!**")
-				.setDescription(`**${message.author}** correctly guessed **${randomC.name}**\nThey have gained **${points}** points!\nNew balance: **${newbal}**`);
+				.setDescription(`**${message.author}** correctly guessed **${randomC.name}**\nThey have gained **${points}** points!\nNew balance: **${user.points}**`);
 			await interaction.followUp({ embeds: [correctEmbed] });
 			
 		});
