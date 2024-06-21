@@ -4,7 +4,7 @@
 	],
 
 	"levels": [
-        {"name": "level", "file": "https://mewo.lol/games", "difficulty": "Hard"}
+		{"name": "level", "file": "https://mewo.lol/games", "difficulty": "Hard"}
 	],
 
 	"difficulties": {
