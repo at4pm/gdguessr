@@ -1,8 +1,8 @@
 {
 	"creators": [
-		{"name": "Nexus", "file": "nexus.png", "difficulty": "Easy"},
-		{"name": "Partition", "file": "partition.png", "difficulty": "Medium"},
-		{"name": "Dorami", "file": "dorami.png", "difficulty": "Hard"}
+		{"name": "Nexus", "file": "https://mewo.lol/bot/creators/nexus.png", "difficulty": "Easy"},
+		{"name": "Partition", "file": "https://mewo.lol/bot/creators/partition.png", "difficulty": "Medium"},
+		{"name": "Dorami", "file": "https://mewo.lol/bot/creators/dorami.png", "difficulty": "Hard"}
 	],
 
 	"levels": [

@@ -28,7 +28,7 @@ module.exports = {
 		const guessEmbed = new EmbedBuilder()
 			.setColor(0xFFFF00)
 			.setDescription(`**Guess the Creator!**\nDifficulty: ${difficulties[randomC.difficulty]["emoji"]} ${randomC.difficulty}`)
-			.setImage(`https://mewo.lol/bot/images/creators/${randomC.file}`);
+			.setImage(`${randomC.file}`);
 
 		await interaction.reply({ embeds: [guessEmbed] });
 

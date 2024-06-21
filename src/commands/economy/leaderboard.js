@@ -28,7 +28,6 @@ module.exports = {
             users.map(async (user, index) => {
                 const data = await idToName(user.id);
                 const username = await JSON.parse(data).username;
-                console.log(username);
                 embed.addFields({ name: `#${index + 1} ${username}: ${user.points.toString()}`, value: " " });
             }),
         );

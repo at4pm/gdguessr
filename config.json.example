@@ -1,0 +1,15 @@
+{
+	"creators": [
+		{"name": "creator", "file": "https://mewo.lol/profile", "difficulty": "Medium"}
+	],
+
+	"levels": [
+        {"name": "level", "file": "https://mewo.lol/games", "difficulty": "Hard"}
+	],
+
+	"difficulties": {
+		"Easy": {"points": 5, "emoji": "<:Easy:1249495433127137371>"},
+		"Medium": {"points": 10, "emoji": "idk"},
+		"Hard": {"points": 15, "emoji": "<:Impossible:1249495658654597182>"}
+	}
+}
