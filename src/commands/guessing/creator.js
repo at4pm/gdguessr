@@ -15,6 +15,7 @@ module.exports = {
 					{ name: 'Easy', value: 'Easy' },
 					{ name: 'Medium', value: 'Medium' },
 					{ name: 'Hard', value: 'Hard' },
+					{ name: 'Insane', value: 'Insane' }
 				)),
 	
 	async execute(interaction) {
