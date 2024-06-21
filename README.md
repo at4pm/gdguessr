@@ -15,6 +15,9 @@ Currently, this is a closed project and is not accepting more contributers. This
 ### Status
 GDGuessr **v0.1.0-alpha.1** by [@at4pm]("https://mewo.lol/profile") and @d4isdavid
 
+## License
+[View here]("https://github.com/at4pm/gdguessr/blob/main/LICENSE")
+
 [CREATORSRC]: <https://github.com/at4pm/gdguessr/blob/main/src/commands/guessing/creator.js>
 
 [BALANCESRC]: <https://github.com/at4pm/gdguessr/blob/main/src/commands/economy/points.js>
