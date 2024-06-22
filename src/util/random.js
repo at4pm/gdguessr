@@ -1,13 +1,16 @@
-const { creators, levels } = require('../../config.json');
+const config = require("../../config.json");
 
-function random(type) {
-	if (type == "creator") {
-		const random = Math.floor(Math.random() * creators.length);
-		return creators[random];
-	} else if (type == "level") {
-		const random = Math.floor(Math.random() * levels.length);
-		return levels[random]; 
-	}
+function random(type, difficulty) {
+	const objs = config[type].filter(o => o.difficulty === difficulty);
+	const index = Math.floor(Math.random() * objs.length);
+
+	return objs[index];
 }
 
-module.exports = random;
+function randomCreator(difficulty) {
+	return random("creators", difficulty);
+}
+
+module.exports = {
+	randomCreator,
+};
