@@ -1,4 +1,4 @@
-const config = require('../../config.json');
+const config = require("../../config.json");
 
 function random(type, difficulty) {
 	const objs = config[type].filter(o => o.difficulty === difficulty);
@@ -8,7 +8,7 @@ function random(type, difficulty) {
 }
 
 function randomCreator(difficulty) {
-	return random('creators', difficulty);
+	return random("creators", difficulty);
 }
 
 module.exports = {
