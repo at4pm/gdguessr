@@ -8,9 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Alpha-v0.1.1] - 2024-06-23
 
-### Changes
+### Changed
 
 - Renamed points to orbs (Bot side not database side)
+- Added Trophy emoji to the leaderboard
+
+### Removed
+
+- Removed description from the leaderboard embed
 
 ## [Alpha-v0.1.0] - 2024-06-22
 
