@@ -10,9 +10,7 @@ module.exports = {
 		const users = await UserModel.find().sort({ points: -1 }).limit(10);
 
 		const embed = new EmbedBuilder()
-			.setTitle(
-				":earth_asia: <:Trophy:1253919091656495144>  Global Leaderboard",
-			)
+			.setTitle(":earth_asia: Global Leaderboard")
 			.setDescription("Points Leaderboard");
 
 		for await (const [index, user] of users.entries()) {

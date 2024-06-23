@@ -16,9 +16,9 @@ module.exports = {
 		);
 
 		const balanceEmbed = new EmbedBuilder()
-			.setTitle("<:Mana:1253919623682981899> Balance")
+			.setTitle("Balance")
 			.setColor(0xffff00)
-			.setDescription(`You have **${user.points}** orbs!`);
+			.setDescription(`You have **${user.points}** points!`);
 
 		await interaction.reply({ embeds: [balanceEmbed] });
 	},
