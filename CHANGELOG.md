@@ -22,3 +22,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 [unreleased]: https://github.com/at4pm/gdguessr/compare/Alpha-v0.1.1...main
 [alpha-v0.1.0]: https://github.com/at4pm/gdguessr/commits/Alpha-v0.1.0
+[alpha-v0.1.1]: https://github.com/at4pm/gdguessr/commits/Alpha-v0.1.1
