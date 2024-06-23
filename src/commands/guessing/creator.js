@@ -1,8 +1,4 @@
-const {
-	SlashCommandBuilder,
-	EmbedBuilder,
-	userMention,
-} = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { difficulties } = require("../../../config.json");
 const { UserModel } = require("../../schema/user.js");
 const { randomCreator } = require("../../util/random.js");
